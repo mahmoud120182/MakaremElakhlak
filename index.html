@@ -624,35 +624,43 @@
         <div class="hadith-content">
             <div class="hadith-image-container">
                 <img src="moemen01.jpeg" class="hadith-image">
-                <button class="share-btn" onclick="shareImage('moemen01.jpeg')"><i class="fas fa-share-alt"></i></button>
+                <button class="share-btn" onclick="shareImage('moemen01.jpeg')"><i
+                        class="fas fa-share-alt"></i></button>
             </div>
             <div class="hadith-image-container">
                 <img src="moemen02.jpeg" class="hadith-image">
-                <button class="share-btn" onclick="shareImage('moemen02.jpeg')"><i class="fas fa-share-alt"></i></button>
+                <button class="share-btn" onclick="shareImage('moemen02.jpeg')"><i
+                        class="fas fa-share-alt"></i></button>
             </div>
             <div class="hadith-image-container">
                 <img src="moemen03.jpeg" class="hadith-image">
-                <button class="share-btn" onclick="shareImage('moemen03.jpeg')"><i class="fas fa-share-alt"></i></button>
+                <button class="share-btn" onclick="shareImage('moemen03.jpeg')"><i
+                        class="fas fa-share-alt"></i></button>
             </div>
             <div class="hadith-image-container">
                 <img src="moemen04.jpeg" class="hadith-image">
-                <button class="share-btn" onclick="shareImage('moemen04.jpeg')"><i class="fas fa-share-alt"></i></button>
+                <button class="share-btn" onclick="shareImage('moemen04.jpeg')"><i
+                        class="fas fa-share-alt"></i></button>
             </div>
             <div class="hadith-image-container">
                 <img src="moemen05.jpeg" class="hadith-image">
-                <button class="share-btn" onclick="shareImage('moemen05.jpeg')"><i class="fas fa-share-alt"></i></button>
+                <button class="share-btn" onclick="shareImage('moemen05.jpeg')"><i
+                        class="fas fa-share-alt"></i></button>
             </div>
             <div class="hadith-image-container">
                 <img src="moemen06.jpeg" class="hadith-image">
-                <button class="share-btn" onclick="shareImage('moemen06.jpeg')"><i class="fas fa-share-alt"></i></button>
+                <button class="share-btn" onclick="shareImage('moemen06.jpeg')"><i
+                        class="fas fa-share-alt"></i></button>
             </div>
             <div class="hadith-image-container">
                 <img src="moemen07.jpeg" class="hadith-image">
-                <button class="share-btn" onclick="shareImage('moemen07.jpeg')"><i class="fas fa-share-alt"></i></button>
+                <button class="share-btn" onclick="shareImage('moemen07.jpeg')"><i
+                        class="fas fa-share-alt"></i></button>
             </div>
             <div class="hadith-image-container">
                 <img src="moemen08.jpeg" class="hadith-image">
-                <button class="share-btn" onclick="shareImage('moemen08.jpeg')"><i class="fas fa-share-alt"></i></button>
+                <button class="share-btn" onclick="shareImage('moemen08.jpeg')"><i
+                        class="fas fa-share-alt"></i></button>
             </div>
         </div>
     </div>
@@ -1140,7 +1148,7 @@
                     showMainPage();
                 } else {
                     // Check if this is a known hadith page
-                    const hadithTitles = ['اَلْحَيَاءُ', 'اَلرِّفْقُ وَالرَّحْمَةُ', 'اَلْغَضَبُ', 'المُؤمِن', 'آفَةُ اللِّسَانِ', 'النَّذْرُ وَالحَلِفُ', 'الْعَمَلِ الصَّالِحِ', 'الإِسْلَامُ', 'قريباً', 'قريباً', 'قريباً', 'قريباً'];                    if (hadithTitles.includes(hash)) {
+                    const hadithTitles = ['اَلْحَيَاءُ', 'اَلرِّفْقُ وَالرَّحْمَةُ', 'اَلْغَضَبُ', 'المُؤمِن', 'آفَةُ اللِّسَانِ', 'النَّذْرُ وَالحَلِفُ', 'الْعَمَلِ الصَّالِحِ', 'الإِسْلَامُ', 'قريباً', 'قريباً', 'قريباً', 'قريباً']; if (hadithTitles.includes(hash)) {
                         showHadithPage(hash, 6); // Default to 6 images
                     } else {
                         showMainPage();
@@ -1169,7 +1177,26 @@
         // Share image functionality
         function shareImage(imageSrc) {
             currentImageToShare = imageSrc;
-            document.getElementById('shareModal').style.display = 'flex';
+
+            // Check if Web Share API is available (mobile devices)
+            if (navigator.share) {
+                const pageTitle = document.querySelector('.hadith-page-title').textContent;
+                const shareText = `حديث عن ${pageTitle} - من تطبيق مكارم الأخلاق`;
+                const imageUrl = window.location.origin + '/' + imageSrc;
+
+                navigator.share({
+                    title: pageTitle,
+                    text: shareText,
+                    url: imageUrl
+                }).catch(err => {
+                    console.log('Error sharing:', err);
+                    // Fallback to modal if Web Share fails
+                    document.getElementById('shareModal').style.display = 'flex';
+                });
+            } else {
+                // Fallback to modal for desktop
+                document.getElementById('shareModal').style.display = 'flex';
+            }
         }
 
         function closeShareModal() {
@@ -1179,16 +1206,18 @@
         function shareVia(platform) {
             const pageTitle = document.querySelector('.hadith-page-title').textContent;
             const shareText = `حديث عن ${pageTitle} - من تطبيق مكارم الأخلاق`;
-            const shareUrl = window.location.href;
+            const imageUrl = window.location.origin + '/' + currentImageToShare;
 
             let shareLink = '';
 
             switch (platform) {
                 case 'whatsapp':
-                    shareLink = `https://wa.me/?text=${encodeURIComponent(shareText + ' ' + shareUrl)}`;
+                    // WhatsApp doesn't support direct image sharing via URL, so we'll use the image URL in the text
+                    shareLink = `https://wa.me/?text=${encodeURIComponent(shareText + ' ' + imageUrl)}`;
                     break;
                 case 'facebook':
-                    shareLink = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+                    // Facebook sharing with image
+                    shareLink = `https://www.facebook.com/dialog/share?app_id=your_app_id&display=popup&href=${encodeURIComponent(imageUrl)}&quote=${encodeURIComponent(shareText)}`;
                     break;
             }
 
