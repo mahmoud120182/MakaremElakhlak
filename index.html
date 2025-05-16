@@ -402,8 +402,8 @@
                 <span class="image-counter">7</span>
 
             </div>
-            <div class="hadith-title" onclick="showHadithPage('قريباً', 6)">قريباً
-                <span class="image-counter">6</span>
+            <div class="hadith-title" onclick="showHadithPage('سُلُوكُ الْمُسْلِمِ', 12)">سُلُوكُ الْمُسْلِمِ
+                <span class="image-counter">12</span>
 
             </div>
             <div class="hadith-title" onclick="showHadithPage('قريباً', 6)">قريباً
@@ -783,29 +783,47 @@
                 <img src="salam07.jpeg" class="hadith-image">
         </div>
     </div>
-    <div id="hadith-page-قريباً" class="hadith-page">
+    <div id="hadith-page-سُلُوكُ الْمُسْلِمِ" class="hadith-page">
         <div class="hadith-header">
-            <div class="hadith-page-title">قريباً</div>
+            <div class="hadith-page-title">سُلُوكُ الْمُسْلِمِ</div>
             <i class="fas fa-home home-icon" onclick="showMainPage()"></i>
         </div>
         <div class="hadith-content">
             <div class="hadith-image-container">
-                <img src="1.jpg" class="hadith-image">
+                <img src="selok01" class="hadith-image">
             </div>
             <div class="hadith-image-container">
-                <img src="1.jpg" class="hadith-image">
+                <img src="selok02" class="hadith-image">
             </div>
             <div class="hadith-image-container">
-                <img src="1.jpg" class="hadith-image">
+                <img src="selok03" class="hadith-image">
             </div>
             <div class="hadith-image-container">
-                <img src="1.jpg" class="hadith-image">
+                <img src="selok04" class="hadith-image">
             </div>
             <div class="hadith-image-container">
-                <img src="1.jpg" class="hadith-image">
+                <img src="selok05" class="hadith-image">
             </div>
             <div class="hadith-image-container">
-                <img src="1.jpg" class="hadith-image">
+                <img src="selok06" class="hadith-image">
+            </div>
+                        <div class="hadith-image-container">
+                <img src="selok07" class="hadith-image">
+            </div>
+                        <div class="hadith-image-container">
+                <img src="selok08" class="hadith-image">
+            </div>
+                        <div class="hadith-image-container">
+                <img src="selok09" class="hadith-image">
+            </div>
+                        <div class="hadith-image-container">
+                <img src="selok10" class="hadith-image">
+            </div>
+                        <div class="hadith-image-container">
+                <img src="selok11" class="hadith-image">
+            </div>
+                        <div class="hadith-image-container">
+                <img src="selok12" class="hadith-image">
             </div>
         </div>
     </div>
@@ -927,7 +945,7 @@
                     showMainPage();
                 } else {
                     // Check if this is a known hadith page
-                    const hadithTitles = ['اَلْحَيَاءُ', 'اَلرِّفْقُ وَالرَّحْمَةُ', 'اَلْغَضَبُ', 'المُؤمِن', 'آفَةُ اللِّسَانِ', 'النَّذْرُ وَالحَلِفُ', 'الْعَمَلِ الصَّالِحِ', 'الإِسْلَامُ', 'الِاسْتِئْذَانُ وَالتَّجَسُّسُ', 'اَلتَّحِيَّةُ بِالسَّلَامِ', 'قريباً', 'قريباً'];
+                    const hadithTitles = ['اَلْحَيَاءُ', 'اَلرِّفْقُ وَالرَّحْمَةُ', 'اَلْغَضَبُ', 'المُؤمِن', 'آفَةُ اللِّسَانِ', 'النَّذْرُ وَالحَلِفُ', 'الْعَمَلِ الصَّالِحِ', 'الإِسْلَامُ', 'الِاسْتِئْذَانُ وَالتَّجَسُّسُ', 'اَلتَّحِيَّةُ بِالسَّلَامِ', 'سُلُوكُ الْمُسْلِمِ', 'قريباً'];
                     if (hadithTitles.includes(hash)) {
                         showHadithPage(hash, 6); // Default to 6 images
                     } else {
